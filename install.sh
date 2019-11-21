@@ -16,6 +16,12 @@ main(){
 
     archchroot
 
+    config
+
+    exit
+    umount /dev/sda1
+    reboot
+
 }
 
 config(){
@@ -137,3 +143,6 @@ archchroot(){
     rm /mnt/root/$(basename "${0}")
 
 }
+
+
+main
