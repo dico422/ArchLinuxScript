@@ -12,7 +12,7 @@ main(){
 
     pacman-basic
 
-    genstab -U /mnt >> /mnt/etc/fstab
+    genfstab -U /mnt >> /mnt/etc/fstab
 
     archchroot
 
@@ -122,7 +122,7 @@ archchroot(){
 
     cp ${0} /mnt/root
     chmod 755 /mnt/root/$(basename "${0}")
-    arch-chroot /mnt /root/$(basename "${0}") --chroot ${1} ${2}
+    arch-chroot /mnt /root/$(basename "${0}")
     rm /mnt/root/$(basename "${0}")
 
 }
