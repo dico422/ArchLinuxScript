@@ -18,9 +18,7 @@ main(){
 
     config
 
-    exit
-    umount /dev/sda1
-    reboot
+    umount /dev/sda2
 
 }
 
@@ -78,20 +76,20 @@ basic(){
 
 mount-disc(){
 
-    swapon /dev/sda2
+    swapon /dev/sda1
 
     # Montaremos o disco em /mnt
-    mount /dev/sda1 /mnt
+    mount /dev/sda2 /mnt
 
 }
 
 format-disc(){
 
     # Formataremos o disco em mkfs.ext4
-    mkfs.ext4 /dev/sda1
+    mkfs.ext4 /dev/sda2
 
     # Formatearemos o SWAP
-    mkswap /dev/sda2
+    mkswap /dev/sda1
 
 }
 
@@ -112,27 +110,12 @@ fdisk-prog(){
 # Limparemos qualquer reparticao que o disco tiver
 wipefs -a /dev/sda
 
-fdisk /dev/sda << EOF
-n
-p
-2
-`\n`
-4196352
-
-n
-p
-1
-`\n`
-`\n`
-
-a
-1
-t
-2
-82
-
-w
+# Sector, Size, ID, Bootable (*,-)
+sfdisk /dev/sda << EOF
+,2G,82
+,,83,*
 EOF
+
 }
 
 archchroot(){
